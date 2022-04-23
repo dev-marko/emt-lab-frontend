@@ -1,12 +1,12 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-const bookTerm = (props) => {
+const BookTerm = (props) => {
     return (
-        <tr>
+        <tr key={props.term.id}>
             <td scope={"col"}>{props.term.name}</td>
             <td scope={"col"}>{props.term.category}</td>
-            <td scope={"col"}>{props.term.author.name}</td>
+            <td scope={"col"}>{props.term.author.name} {props.term.author.surname}</td>
             <td scope={"col"}>{props.term.availableCopies}</td>
             <td scope={"col"} className={"text-right"}>
                 <a
@@ -25,4 +25,4 @@ const bookTerm = (props) => {
     );
 }
 
-export default bookTerm;
+export default BookTerm;

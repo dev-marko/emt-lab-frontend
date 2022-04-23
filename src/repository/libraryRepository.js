@@ -14,11 +14,12 @@ const LibraryService = {
     return axios.get("/authors");
   },
 
-  // mi nedostasuva metod za vlecenje na edna kniga
-  // na backend
-
   fetchBooks: () => {
     return axios.get("/books");
+  },
+
+  fetchBookById: (bookId) => {
+    return axios.get(`/books/${bookId}`);
   },
 
   addBook: (name, category, authorId, availableCopies) => {
@@ -31,7 +32,7 @@ const LibraryService = {
   },
 
   editBook : (bookId, name, category, authorId, availableCopies) => {
-    return axios.put(`/boooks/${bookId}/edit`, {
+    return axios.put(`/books/${bookId}/edit`, {
       "name" : name,
       "category" : category,
       "authorId" : authorId,

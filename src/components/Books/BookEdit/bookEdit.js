@@ -1,12 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+
+// TODO fix edit ne raboti da se zacuva knigata ako voopsto ne editiram nesto
+
 const BookEdit = (props) => {
     const navigate = useNavigate();
 
     const [formData, updateFormData] = React.useState({
       name : "",
-      category : "",
+      category : "NOVEL",
       author : 1,
       availableCopies : 1
     })
@@ -48,7 +51,7 @@ const BookEdit = (props) => {
                         <select name="category" className="form-control" onChange={handleChange}>
                             {props.categories.map((term) => {
                                     if(props.book.category !== undefined && props.book.category === term) {
-                                      return <option selected={props.book.category} value={term}>{term}</option>
+                                      return <option selected={props.book.category} value={props.book.category}>{term}</option>
                                     } else {
                                       return <option value={term}>{term}</option>
                                     }
@@ -59,9 +62,9 @@ const BookEdit = (props) => {
                     <div className="form-group">
                         <label>Author</label>
                         <select name="author" className="form-control" onChange={handleChange}>
-                            {props.manufacturers.map((term) => {
+                            {props.authors.map((term) => {
                                  if(props.book.author !== undefined && props.book.author.id === term.id) {
-                                    return <option selected={props.book.author.id} value={term.id}>{term.name + ' ' + term.surname}</option>
+                                    return <option selected={props.book.author.id} value={props.book.author.id}>{term.name + ' ' + term.surname}</option>
                                   } else {
                                     return <option value={term.id}>{term.name + ' ' + term.surname}</option>
                                   }
@@ -76,7 +79,6 @@ const BookEdit = (props) => {
                            id="availableCopies"
                            name="availableCopies"
                            placeholder={props.book.availableCopies}
-                           required
                            onChange={handleChange}
                     />
                 </div>

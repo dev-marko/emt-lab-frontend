@@ -7,6 +7,7 @@ import Header from '../Header/header';
 import BookAdd from '../Books/BookAdd/bookAdd';
 import BookEdit from '../Books/BookEdit/bookEdit';
 import Books from '../Books/BookList/books';
+import Categories from '../Categories/categories'
 
 class App extends Component {
 
@@ -16,12 +17,10 @@ class App extends Component {
       books : [],
       authors : [],
       categories : [],
-      countries : []
+      countries : [],
+      selectedBook : {}
     }
   }
-
-  // TODO: dodadi getBook(bookId) i posle dodadi selectedBook i posle testiraj site funkcionalnosti
-  // so localhost:3000, otkoga se raboti moze da deploy-nesh React aplikaciajta na heroku
 
   render () {
     return (
@@ -30,19 +29,23 @@ class App extends Component {
                     <Header/>
                     <div className={"container"}>
                         <Routes>
+                            <Route path={"/categories"} 
+                                   element={<Categories categories={this.state.categories}/>} exact/>
                             <Route path={"/books/add"}
                                    element={<BookAdd categories={this.state.categories}
-                                                        authors={this.state.authors}
-                                                        onAddBook={this.addBook}/>} exact/>
+                                                     authors={this.state.authors}
+                                                     onAddBook={this.addBook}/>} exact/>
                             <Route path={"/books/:id/edit"}
                                    element={<BookEdit categories={this.state.categories}
-                                                         authors={this.state.authors}
-                                                         onEditBook={this.editBook}
-                                                        />} exact/>
+                                                      authors={this.state.authors}
+                                                      onEditBook={this.editBook}
+                                                      book = {this.state.selectedBook}
+                                                      />} exact/>
                             <Route path={"/books"}
-                                   element={<Books books={this.state.books}
-                                                      onDelete={this.deleteProduct}
-                                                      />}
+                                   element={<Books  books={this.state.books}
+                                                    onDelete={this.deleteBook}
+                                                    onEdit={this.fetchBookById}
+                                                    />}
                                    exact/>
                             <Route path="/" element={<Navigate replace to="/books"/>}/>
                         </Routes>
@@ -84,6 +87,15 @@ class App extends Component {
     .then((data) => {
       this.setState({
         books : data.data
+      })
+    })
+  }
+
+  fetchBookById = (bookId) => {
+    LibraryService.fetchBookById(bookId)
+    .then((data) => {
+      this.setState({
+        selectedBook: data.data
       })
     })
   }

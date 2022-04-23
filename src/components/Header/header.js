@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const header = (props) => {
+const Header = (props) => {
   return (
     <header>
             <nav className="navbar navbar-expand-md navbar-dark navbar-fixed bg-dark">
@@ -16,12 +16,8 @@ const header = (props) => {
                             <Link className="nav-link" to={"/books"}>Books</Link>
                         </li>
                         <li className="nav-item active">
-                            <Link className="nav-link" to={"#"}>Categories</Link>
+                            <Link className="nav-link" to={"/categories"}>Categories</Link>
                         </li>
-                        {/* za avtorite TODO
-                        <li className="nav-item active">
-                            <Link className={"nav-link"} to={"/manufacturers"}>Manufacturers</Link>
-                        </li> */}
                     </ul>
                 </div>
             </nav>
@@ -29,4 +25,4 @@ const header = (props) => {
   );
 }
 
-export default header;
+export default Header;
