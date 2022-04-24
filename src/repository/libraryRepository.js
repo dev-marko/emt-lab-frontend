@@ -40,6 +40,10 @@ const LibraryService = {
     });
   },
 
+  markBookAsTaken : (bookId) => {
+    return axios.put(`/books/${bookId}/mark-as-taken`);
+  },
+
   deleteBook: (bookId) => {
     return axios.delete(`/books/${bookId}/delete`);
   }

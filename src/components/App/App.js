@@ -45,6 +45,7 @@ class App extends Component {
                                    element={<Books  books={this.state.books}
                                                     onDelete={this.deleteBook}
                                                     onEdit={this.fetchBookById}
+                                                    onMarkAsTaken={this.markBookAsTaken}
                                                     />}
                                    exact/>
                             <Route path="/" element={<Navigate replace to="/books"/>}/>
@@ -109,6 +110,13 @@ class App extends Component {
 
   editBook = (id, name, category, authorId, availableCopies) => {
     LibraryService.editBook(id, name, category, authorId, availableCopies)
+        .then(() => {
+            this.loadBooks();
+        });
+  }
+
+  markBookAsTaken = (id) => {
+    LibraryService.markBookAsTaken(id)
         .then(() => {
             this.loadBooks();
         });

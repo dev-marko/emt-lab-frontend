@@ -78,7 +78,8 @@ class Books extends Component {
             <BookTerm
                 term={term}
                 onDelete={this.props.onDelete}
-                onEdit={this.props.onEdit}/>
+                onEdit={this.props.onEdit}
+                onMarkAsTaken={this.props.onMarkAsTaken}/>
         );
     }).filter((book, index) => {
         return index >= offset && index < nextPageOffset;
